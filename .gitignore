@@ -3,6 +3,7 @@ logs/
 conf/nginx/
 conf/php/
 conf/nginx/
+conf/mysql/
 
 local-site.json
 app/sql/
