@@ -7,10 +7,10 @@
 /config.json
 
 # Build modules
-/node_modules/
+mooms_dev/node_modules/
 
 # Composer packages
-/vendor/
+mooms_dev/vendor/
 
 # WordPress Coding Standards
 /wpcs/
