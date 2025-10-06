@@ -348,36 +348,43 @@ function setupAjaxSendMail() {
 }
 
 function setupMenuMobile() {
-  const toggleBtn   = document.querySelector(".mobile-header__menu-toggle");
-  const menuContent = document.querySelector(".mobile-header__menu-content");
-  const closeBtn    = document.querySelector(".mobile-header__close");
-  const menuItems   = document.querySelectorAll(".mobile-header__menu li");
-  const globalBtn   = menuContent?.querySelector(".mobile-header-header .language .global");
-  const dropdownItems = document.querySelectorAll('.nav_menu > li.nav__dropdown');
+  const mobileHeader = document.querySelector(".mobile-header");
+  const toggleBtn    = document.querySelector(".mobile-header__menu-toggle");
+  const menuContent  = document.querySelector(".mobile-header__menu-content");
+  const closeBtn     = document.querySelector(".mobile-header__close");
+  const menuItems    = document.querySelectorAll(".mobile-header__menu li");
+  const globalBtn    = menuContent?.querySelector(".mobile-header-header .language .global");
+  const dropdownItems = document.querySelectorAll(".nav_menu > li.nav__dropdown");
 
-  // Open mobile menu
+  // === FUNCTIONS ===
+  const hideHeader = () => mobileHeader?.classList.add("hidden");
+  const showHeader = () => mobileHeader?.classList.remove("hidden");
+
+  // === OPEN MENU ===
   toggleBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
     menuContent?.classList.add("active");
     document.documentElement.classList.add("no-scroll");
     document.body.classList.add("no-scroll");
+    hideHeader(); // Ẩn thanh khi mở menu
 
-    // Reset submenu when opening menu
+    // Reset tất cả submenu
     menuItems.forEach((item) => item.classList.remove("open"));
   });
 
-  // Close mobile menu
+  // === CLOSE MENU ===
   closeBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
     menuContent?.classList.remove("active");
     document.documentElement.classList.remove("no-scroll");
     document.body.classList.remove("no-scroll");
+    showHeader(); // Hiện lại thanh khi đóng menu
 
-    // Close all submenus
+    // Đóng tất cả submenu
     menuItems.forEach((item) => item.classList.remove("open"));
   });
 
-  // Toggle language dropdown on mobile
+  // === TOGGLE NGÔN NGỮ (CHỈ MOBILE) ===
   globalBtn?.addEventListener("click", (e) => {
     if (window.innerWidth < 769) {
       e.stopPropagation();
@@ -385,7 +392,7 @@ function setupMenuMobile() {
     }
   });
 
-  // Close menu and language dropdown when clicking outside
+  // === CLICK NGOÀI MENU → ĐÓNG MENU ===
   document.addEventListener("click", (e) => {
     if (menuContent?.classList.contains("active") &&
         !menuContent.contains(e.target) &&
@@ -393,9 +400,11 @@ function setupMenuMobile() {
       menuContent.classList.remove("active");
       document.documentElement.classList.remove("no-scroll");
       document.body.classList.remove("no-scroll");
+      showHeader();
       menuItems.forEach((item) => item.classList.remove("open"));
     }
 
+    // Đóng dropdown ngôn ngữ nếu click ra ngoài
     if (window.innerWidth < 769 &&
         globalBtn?.classList.contains("active") &&
         !globalBtn.contains(e.target)) {
@@ -403,7 +412,7 @@ function setupMenuMobile() {
     }
   });
 
-  // Handle submenu in mobile
+  // === XỬ LÝ SUBMENU (CLICK MỞ/ĐÓNG) ===
   menuItems.forEach((item) => {
     const submenu = item.querySelector(".sub-menu");
 
@@ -418,10 +427,21 @@ function setupMenuMobile() {
     }
   });
 
-  // Add class for desktop dropdown
-  dropdownItems.forEach(item => {
-    if (item.querySelector('.sub-menu')) {
-      item.classList.add('has-submenu');
+  // === GẮN CLASS DESKTOP DROPDOWN ===
+  dropdownItems.forEach((item) => {
+    if (item.querySelector(".sub-menu")) {
+      item.classList.add("has-submenu");
     }
+  });
+
+  // === ẨN HEADER KHI CUỘN, HIỆN LẠI KHI DỪNG CUỘN ===
+  let scrollTimer;
+  window.addEventListener("scroll", () => {
+    hideHeader();
+
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      showHeader();
+    }, 400);
   });
 }
