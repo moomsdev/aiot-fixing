@@ -91,7 +91,7 @@ class MMS_Menu_Walker extends Walker_Nav_Menu
                 $args->sub_menu_item_count = 0;
             }
             $args->sub_menu_item_count++;
-            
+
             // Nếu là item đầu tiên trong sub-menu, tạo parent menu
             if ($args->sub_menu_item_count == 1) {
                 $output .= '<li class="sub-menu-parent">';
@@ -139,7 +139,7 @@ class MMS_Menu_Walker extends Walker_Nav_Menu
         if ($menu_img_id) {
             $menu_img_url = wp_get_attachment_image_url($menu_img_id, 'thumbnail');
             if ($menu_img_url) {
-                $item_output .= '<img src="' . esc_url($menu_img_url) . '" alt="' . esc_attr($item->title) . '" class="menu-img">';
+                $item_output .= '<figure><img src="' . esc_url($menu_img_url) . '" alt="' . esc_attr($item->title) . '" class="menu-img"></figure>';
             }
         }
         $item_output .= $link_before . apply_filters('the_title', $item->title, $item->ID) . $link_after;

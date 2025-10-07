@@ -164,5 +164,7 @@
 					?>
 				</div>
 			</div>
-			<button class="mobile-header__close">Close</button>
+			<div class="mobile-header__close">
+				<button class="button__close">Close</button>
+			</div>
 		</div>
