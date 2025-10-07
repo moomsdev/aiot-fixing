@@ -356,35 +356,33 @@ function setupMenuMobile() {
   const globalBtn    = menuContent?.querySelector(".mobile-header-header .language .global");
   const dropdownItems = document.querySelectorAll(".nav_menu > li.nav__dropdown");
 
-  // === FUNCTIONS ===
   const hideHeader = () => mobileHeader?.classList.add("hidden");
   const showHeader = () => mobileHeader?.classList.remove("hidden");
 
-  // === OPEN MENU ===
   toggleBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
     menuContent?.classList.add("active");
     document.documentElement.classList.add("no-scroll");
     document.body.classList.add("no-scroll");
-    hideHeader(); // Ẩn thanh khi mở menu
+    hideHeader(); // Hide menu
 
-    // Reset tất cả submenu
+    // Reset all submenu
     menuItems.forEach((item) => item.classList.remove("open"));
   });
 
-  // === CLOSE MENU ===
+  //
   closeBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
     menuContent?.classList.remove("active");
     document.documentElement.classList.remove("no-scroll");
     document.body.classList.remove("no-scroll");
-    showHeader(); // Hiện lại thanh khi đóng menu
+    showHeader(); // Display menu
 
-    // Đóng tất cả submenu
+    // Close all submenu
     menuItems.forEach((item) => item.classList.remove("open"));
   });
 
-  // === TOGGLE NGÔN NGỮ (CHỈ MOBILE) ===
+  // Tonggle languge
   globalBtn?.addEventListener("click", (e) => {
     if (window.innerWidth < 769) {
       e.stopPropagation();
@@ -392,27 +390,7 @@ function setupMenuMobile() {
     }
   });
 
-  // === CLICK NGOÀI MENU → ĐÓNG MENU ===
-  document.addEventListener("click", (e) => {
-    if (menuContent?.classList.contains("active") &&
-        !menuContent.contains(e.target) &&
-        !toggleBtn.contains(e.target)) {
-      menuContent.classList.remove("active");
-      document.documentElement.classList.remove("no-scroll");
-      document.body.classList.remove("no-scroll");
-      showHeader();
-      menuItems.forEach((item) => item.classList.remove("open"));
-    }
-
-    // Đóng dropdown ngôn ngữ nếu click ra ngoài
-    if (window.innerWidth < 769 &&
-        globalBtn?.classList.contains("active") &&
-        !globalBtn.contains(e.target)) {
-      globalBtn.classList.remove("active");
-    }
-  });
-
-  // === XỬ LÝ SUBMENU (CLICK MỞ/ĐÓNG) ===
+  // Handle sub-menu open
   menuItems.forEach((item) => {
     const submenu = item.querySelector(".sub-menu");
 
@@ -427,14 +405,14 @@ function setupMenuMobile() {
     }
   });
 
-  // === GẮN CLASS DESKTOP DROPDOWN ===
+
   dropdownItems.forEach((item) => {
     if (item.querySelector(".sub-menu")) {
       item.classList.add("has-submenu");
     }
   });
 
-  // === ẨN HEADER KHI CUỘN, HIỆN LẠI KHI DỪNG CUỘN ===
+  // Hide header when scroll and display when stop
   let scrollTimer;
   window.addEventListener("scroll", () => {
     hideHeader();

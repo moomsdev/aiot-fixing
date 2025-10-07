@@ -75,10 +75,11 @@ header {
                 display: block;
                 padding: 4rem 1rem;
                 font-weight: $semiBold;
-                @include resFont(1.4rem, 1.6vw, 1.6rem);
                 color: $textColor;
                 transition: color 0.25s;
                 cursor: pointer;
+
+                @include resFont(1.4, 1.6);
             }
 
             a:hover {
@@ -90,130 +91,130 @@ header {
             }
 
             &.nav__dropdown {
-            > a {
-                position: relative;
-            }
-
-            &.has-submenu > a::after {
-                content: "";
-                position: absolute;
-                z-index: 1001;
-                top: 80%;
-                left: 50%;
-                width: 16rem;
-                height: 2.8rem;
-                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Cpath d='M 0,40 C 10,38 20,35 30,20 C 40,5 50,0 60,0 C 70,0 80,5 90,20 C 100,35 110,38 120,40 L 0,40 Z' fill='%23d85040'/%3E%3C/svg%3E");
-                background-repeat: no-repeat;
-                background-position: center bottom;
-                transform: translateX(-50%);
-                opacity: 0;
-                visibility: hidden;
-                transition:
-                    opacity 0.4s ease,
-                    visibility 0.4s ease;
-            }
-
-            &.has-submenu:hover > a::after {
-                opacity: 1;
-                visibility: visible;
-            }
-
-            > .sub-menu {
-                @include ulReset;
-                position: absolute;
-                z-index: 1000;
-                top: 11rem;
-                left: 50%;
-                width: 95vw;
-                display: grid;
-                gap: 2rem;
-                grid-template-columns: 22rem 1fr;
-                padding: 4rem;
-                border-radius: 4.5rem;
-                background: $primaryColor;
-                box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.15);
-                opacity: 0;
-                visibility: hidden;
-                pointer-events: none;
-                transform: translateX(-50%);
-                transition:
-                    opacity 0.4s ease,
-                    transform 0.4s ease,
-                    visibility 0.4s;
-
-                > .sub-menu-parent {
-                    border-right: 0.1rem solid rgba(255, 255, 255, 0.2);
-                    padding: 2rem 1.4rem;
-
-                    a {
-                        display: block;
-                        line-height: 1.4;
-                        font-size: 2.4rem;
-                        font-weight: $semiBold;
-                        color: #fff;
-
-                        &::after {
-                            content: "";
-                            position: relative;
-                            display: block;
-                            width: 50%;
-                            height: 1px;
-                            background: linear-gradient(0deg, #ffffff, #ffffff) no-repeat right bottom / 0 1px;
-                            background-size: 100% 1px;
-                            transition: background-size 0.3s ease;
-                        }
-
-                        &:hover::after {
-                            background-size: 0 1px;
-                            background-position-x: right;
-                        }
-                    }
+                > a {
+                    position: relative;
                 }
 
-                > .sub-menu-children {
+                &.has-submenu > a::after {
+                    content: "";
+                    position: absolute;
+                    z-index: 1001;
+                    top: 80%;
+                    left: 50%;
+                    width: 16rem;
+                    height: 2.8rem;
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Cpath d='M 0,40 C 10,38 20,35 30,20 C 40,5 50,0 60,0 C 70,0 80,5 90,20 C 100,35 110,38 120,40 L 0,40 Z' fill='%23d85040'/%3E%3C/svg%3E");
+                    background-repeat: no-repeat;
+                    background-position: center bottom;
+                    transform: translateX(-50%);
+                    opacity: 0;
+                    visibility: hidden;
+                    transition:
+                        opacity 0.4s ease,
+                        visibility 0.4s ease;
+                }
+
+                &.has-submenu:hover > a::after {
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                > .sub-menu {
+                    @include ulReset;
+                    position: absolute;
+                    z-index: 1000;
+                    top: 11rem;
+                    left: 50%;
+                    width: 95vw;
                     display: grid;
-                    grid-template-columns: repeat(5, 1fr);
                     gap: 2rem;
-                    list-style: none;
+                    grid-template-columns: 22rem 1fr;
+                    padding: 4rem;
+                    border-radius: 4.5rem;
+                    background: $primaryColor;
+                    box-shadow: 0 1rem 4rem rgba(0, 0, 0, 0.15);
+                    opacity: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                    transform: translateX(-50%);
+                    transition:
+                        opacity 0.4s ease,
+                        transform 0.4s ease,
+                        visibility 0.4s;
 
-                    > li {
+                    > .sub-menu-parent {
+                        border-right: 0.1rem solid rgba(255, 255, 255, 0.2);
+                        padding: 2rem 1.4rem;
+
                         a {
-                            position: relative;
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: center;
-                            border-radius: 1.2rem;
-                            padding: 2rem 1.5rem;
-                            min-height: 13rem;
-                            font-size: 1.6rem;
-                            font-weight: $medium;
+                            display: block;
+                            line-height: 1.4;
+                            font-size: 2.4rem;
+                            font-weight: $semiBold;
                             color: #fff;
-                            transition: all 0.3s;
-                            overflow: hidden;
 
-                            figure {
-                                width: 100%;
-                                aspect-ratio: 4 / 3;
-                                border-radius: 0.8rem;
+                            &::after {
+                                content: "";
+                                position: relative;
+                                display: block;
+                                width: 50%;
+                                height: 1px;
+                                background: linear-gradient(0deg, #ffffff, #ffffff) no-repeat right bottom / 0 1px;
+                                background-size: 100% 1px;
+                                transition: background-size 0.3s ease;
+                            }
+
+                            &:hover::after {
+                                background-size: 0 1px;
+                                background-position-x: right;
+                            }
+                        }
+                    }
+
+                    > .sub-menu-children {
+                        display: grid;
+                        grid-template-columns: repeat(5, 1fr);
+                        gap: 2rem;
+                        list-style: none;
+
+                        > li {
+                            a {
+                                position: relative;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                border-radius: 1.2rem;
+                                padding: 2rem 1.5rem;
+                                min-height: 13rem;
+                                font-size: 1.6rem;
+                                font-weight: $medium;
+                                color: #fff;
+                                transition: all 0.3s;
                                 overflow: hidden;
-                                margin: 0 0 1rem 0;
 
-                                img.menu-img {
+                                figure {
                                     width: 100%;
-                                    height: 100%;
-                                    object-fit: cover;
-                                    transition: transform 0.4s ease, box-shadow 0.4s ease;
+                                    aspect-ratio: 4 / 3;
+                                    border-radius: 0.8rem;
+                                    overflow: hidden;
+                                    margin: 0 0 1rem 0;
+
+                                    img.menu-img {
+                                        width: 100%;
+                                        height: 100%;
+                                        object-fit: cover;
+                                        transition: transform 0.4s ease, box-shadow 0.4s ease;
+                                    }
+                                }
+
+                                &:hover figure img.menu-img {
+                                    transform: scale(1.08);
+                                    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
                                 }
                             }
-
-                            &:hover figure img.menu-img {
-                                transform: scale(1.08);
-                                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-                            }
                         }
                     }
                 }
-            }
 
                 &:hover > .sub-menu {
                     opacity: 1;
@@ -293,11 +294,12 @@ header {
                 a {
                     display: block;
                     padding: 0.5rem 2rem;
-                    @include resFont(1.3rem, 1.5vw, 1.5rem);
                     font-weight: $semiBold;
                     text-decoration: none;
                     white-space: nowrap;
                     color: $textColor;
+
+                    @include resFont(1.4, 1.6);
 
                     &:hover {
                         color: $primaryColor;
@@ -432,7 +434,6 @@ header {
             }
         }
 
-
         .mobile-header__menu-dropdown {
             display: flex;
             align-items: stretch;
@@ -467,7 +468,7 @@ header {
         inset: 0;
         width: 100vw;
         height: 100vh;
-        z-index: 9999;
+        z-index: 99999;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -495,7 +496,7 @@ header {
             background-color: #fff;
             overflow: hidden;
         }
-        
+
         .mobile-header-header,
         .mobile-header-content {
             width: 90%;
@@ -631,7 +632,6 @@ header {
                 transition: background 0.2s ease;
                 transform: translateX(-50%);
 
-
                 &:hover {
                     background: #f3f3f3;
                 }
@@ -643,8 +643,8 @@ header {
                 z-index: 2;
                 bottom: 3.4rem;
                 left: 50%;
-                width: 20rem;
-                height: 66rem;
+                width: 18rem;
+                height: 6rem;
                 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40'%3E%3Cpath d='M 0,40 C 10,38 20,35 30,20 C 40,5 50,0 60,0 C 70,0 80,5 90,20 C 100,35 110,38 120,40 L 0,40 Z' fill='%23d85040'/%3E%3C/svg%3E");
                 background-repeat: no-repeat;
                 background-position: center bottom;
@@ -657,85 +657,86 @@ header {
             display: flex;
             column-gap: 1.5rem;
 
-        &:hover {
+            &:hover {
+                .language-switcher {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translate(-50%, 0);
+                }
+            }
+
             .language-switcher {
-                opacity: 1;
-                visibility: visible;
-                transform: translate(-50%, 0);
-            }
-        }
-
-        .language-switcher {
-            position: absolute;
-            z-index: 9999;
-            top: 160%;
-            left: 50%;
-            width: max-content;
-            padding-top: 1.5rem;
-            background-color: #fff;
-            opacity: 0;
-            visibility: hidden;
-            transform: translate(-50%, 5rem);
-            transition:
-                opacity 0.3s ease,
-                transform 0.3s ease;
-            @include ulReset;
-
-            &::after,
-            &::before {
-                content: "";
-                display: block;
                 position: absolute;
+                z-index: 9999;
+                top: 160%;
                 left: 50%;
-                width: 0;
-                height: 0;
-                transform: translateX(-50%);
-            }
+                width: max-content;
+                padding-top: 1.5rem;
+                background-color: #fff;
+                opacity: 0;
+                visibility: hidden;
+                transform: translate(-50%, 5rem);
+                transition:
+                    opacity 0.3s ease,
+                    transform 0.3s ease;
+                @include ulReset;
 
-            &::after {
-                top: -22px;
-                border: 12px solid transparent;
-                border-bottom-color: #fff;
-                margin-bottom: -1px;
-            }
-
-            &::before {
-                top: -23px;
-                border: 12px solid transparent;
-                border-bottom-color: #000;
-            }
-
-            li {
-                border-left: 1px solid $textColor;
-                border-right: 1px solid $textColor;
-
-                &:first-child {
-                    border-top: 1px solid $textColor;
-                }
-
-                &:last-child {
-                    border-bottom: 1px solid $textColor;
-                }
-
-                a {
+                &::after,
+                &::before {
+                    content: "";
                     display: block;
-                    padding: 0.5rem 2rem;
-                    @include resFont(1.3rem, 1.5vw, 1.5rem);
-                    font-weight: $semiBold;
-                    text-decoration: none;
-                    white-space: nowrap;
-                    color: $textColor;
+                    position: absolute;
+                    left: 50%;
+                    width: 0;
+                    height: 0;
+                    transform: translateX(-50%);
+                }
 
-                    &:hover {
-                        color: $primaryColor;
+                &::after {
+                    top: -22px;
+                    border: 12px solid transparent;
+                    border-bottom-color: #fff;
+                    margin-bottom: -1px;
+                }
+
+                &::before {
+                    top: -23px;
+                    border: 12px solid transparent;
+                    border-bottom-color: #000;
+                }
+
+                li {
+                    border-left: 1px solid $textColor;
+                    border-right: 1px solid $textColor;
+
+                    &:first-child {
+                        border-top: 1px solid $textColor;
+                    }
+
+                    &:last-child {
+                        border-bottom: 1px solid $textColor;
+                    }
+
+                    a {
+                        display: block;
+                        padding: 0.5rem 2rem;
+                        font-weight: $semiBold;
+                        text-decoration: none;
+                        white-space: nowrap;
+                        color: $textColor;
+
+                        @include resFont(1.4, 1.6);
+
+                        &:hover {
+                            color: $primaryColor;
+                        }
                     }
                 }
             }
-        }
 
-        .global {
-            @include iconify("ant-design:global-outlined", 2.3rem);
-        }
+            .global {
+                @include iconify("ant-design:global-outlined", 2.3rem);
+            }
 
             .current-language {
                 font-weight: $semiBold;
