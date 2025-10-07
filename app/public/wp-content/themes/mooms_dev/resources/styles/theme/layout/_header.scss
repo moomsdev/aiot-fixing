@@ -428,9 +428,18 @@ header {
                 color: #222;
                 font-size: 1.2rem;
                 font-weight: 600;
-                svg { font-size: 2rem; }
-                img { width: 1.5rem; }
-                &:hover { color: $primaryColor; }
+
+                svg {
+                    font-size: 2rem;
+                }
+
+                img {
+                    width: 1.5rem;
+                }
+
+                &:hover {
+                    color: $primaryColor;
+                }
             }
         }
 
@@ -453,12 +462,16 @@ header {
             background: transparent;
             color: #fff;
             cursor: pointer;
+
             small {
                 font-size: 1.1rem;
                 font-weight: 600;
                 color: #fff;
             }
-            svg { font-size: 2.5rem; }
+
+            svg {
+                font-size: 2.5rem;
+            }
         }
     }
 
@@ -628,9 +641,9 @@ header {
                 font-weight: bold;
                 background: #fff;
                 color: #222;
-                cursor: pointer;
                 transition: background 0.2s ease;
                 transform: translateX(-50%);
+                cursor: pointer;
 
                 &:hover {
                     background: #f3f3f3;
