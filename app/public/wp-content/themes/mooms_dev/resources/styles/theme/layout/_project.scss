@@ -1,9 +1,7 @@
 @use "../utilities/variables.scss" as *;
 @use "../utilities/mixin.scss" as *;
 
-// ==========================
 // Pagination
-// ==========================
 .pagination {
   position: relative;
   margin-top: 5rem;
@@ -30,9 +28,7 @@
   }
 }
 
-// ==========================
 // Select box
-// ==========================
 .title-select-box {
   margin: 5rem auto 0;
   text-align: center;
@@ -56,7 +52,9 @@
     width: 100% !important;
   }
 
-  .select2-selection__choice {
+  .select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice {
     background-color: $yellowColor;
     border-radius: 3rem;
     padding-right: 1.5rem;
@@ -76,18 +74,18 @@
   margin-top: 4rem;
 }
 
-// ==========================
 // Project item
-// ==========================
 .project-item {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 3rem;
-  padding: 10rem 2rem 0;
+  margin: 10rem 0;
+  padding: 0;
   color: $textColor;
 
   &:last-child {
+    margin-bottom: 0;
     padding-bottom: 15rem;
   }
 
@@ -96,7 +94,8 @@
     direction: rtl;
     text-align: right;
 
-    > div {
+    .project-item__content,
+    .project-item__image {
       direction: ltr;
       text-align: left;
     }
@@ -106,23 +105,54 @@
     margin-right: 1rem;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
+    color: $textColor;
     background-color: $yellowColor;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
     @include resFont(1.4, 1.6);
+
+    &:hover {
+      background-color: darken($yellowColor, 10%);
+      color: #fff;
+      transform: translateY(-2px);
+    }
   }
 
   &__title {
-    padding: 2rem 0;
+    padding: 3rem 0;
     font-weight: $bold;
+    color: $textColor;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+
     @include resFont(1.8, 3.2);
+
+    &:hover {
+      color: $primaryColor;
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+
+  &__link {
+    color: $textColor;
+  }
+
+  &__description {
+    margin-bottom: 1.5rem;
   }
 
   &__list {
     list-style: none;
-    padding: 0 2rem;
 
     &-item {
       position: relative;
-      padding: 1rem 3.5rem;
+      padding: 1.5rem 3.5rem;
 
       &::before {
         @include iconify-mask(
@@ -153,9 +183,6 @@
       z-index: 2;
       max-width: 90%;
       border-radius: 1rem;
-      transform: translateX(
-        calc(((100vw - (100% + ((100vw + 4rem) / 2))) / 2) - 4rem)
-      );
     }
   }
 
@@ -164,9 +191,7 @@
   }
 }
 
-// ==========================
 // Background extensions
-// ==========================
 .project-item {
   &__image {
     position: relative;
@@ -182,7 +207,7 @@
       z-index: 2;
       max-width: 90%;
       border-radius: 1rem;
-      transition: transform 0.4s ease; // optional for smooth move
+      transition: transform 0.4s ease;
     }
 
     &::before,
@@ -199,12 +224,12 @@
     .project-item__image {
       &::after {
         left: 100%;
-        width: calc(100vw - (100% + ((100vw + 4rem) / 2)));
+        width: calc(100vw - (100% + ((100vw + 3.5rem) / 2)));
       }
 
       img {
         transform: translateX(
-          calc(((100vw - (100% + ((100vw + 4rem) / 2))) / 2) - 4rem)
+          calc(((100vw - (100% + ((100vw + 3.5rem) / 2))) / 2) - 1.75rem)
         );
       }
     }
@@ -214,21 +239,19 @@
     .project-item__image {
       &::before {
         right: 100%;
-        width: calc(100vw - (100% + ((100vw + 4rem) / 2)));
+        width: calc(100vw - (100% + ((100vw + 3.5rem) / 2)));
       }
 
       img {
         transform: translateX(
-          calc(-1 * (((100vw - (100% + ((100vw + 4rem) / 2))) / 2) - 4rem))
+          calc(-1 * (((100vw - (100% + ((100vw + 3.5rem) / 2))) / 2) - 6rem))
         );
       }
     }
   }
 }
 
-// ==========================
 // No project notice
-// ==========================
 .no-project-notice {
   text-align: center;
   font-weight: $semiBold;
@@ -238,18 +261,43 @@
   @include resFont(2, 3.2);
 }
 
-// ==========================
+// Responsive - Laptop 1440
+@include maxWidth($xl) {
+  .project-item {
+    &:nth-child(odd) {
+      .project-item__image {
+        &::after {
+          left: 100%;
+          width: calc(100vw - (100% + ((100vw + 3rem) / 2)));
+        }
+      }
+    }
+
+    &:nth-child(even) {
+      .project-item__image {
+        &::before {
+          right: 100%;
+          width: calc(100vw - (100% + ((100vw + 3rem) / 2)));
+        }
+      }
+    }
+  }
+}
+
 // Responsive - Mobile
-// ==========================
 @include maxWidth($sm) {
   .project-item {
     grid-template-columns: 1fr;
     gap: 4rem;
-    padding: 5rem 1.5rem;
+    margin: 3rem 0;
 
     &:nth-child(even) {
       direction: ltr;
       text-align: left;
+    }
+
+    &:last-child {
+      padding-bottom: 2rem;
     }
 
     &__image {
@@ -262,15 +310,23 @@
         transform: none !important;
       }
 
-      &::before,
-      &::after {
-        display: none;
-      }
-    }
+      &,
+      .project-item:nth-child(odd) &,
+      .project-item:nth-child(even) & {
+        &::before,
+        &::after {
+          width: calc((100vw - 100%) / 2);
+          left: auto;
+          right: auto;
+        }
 
-    &__title {
-      text-align: center;
-      padding: 2rem 0;
+        &::before {
+          right: 100%;
+        }
+        &::after {
+          left: 100%;
+        }
+      }
     }
 
     &__list {
