@@ -5,6 +5,7 @@
 /wp-content/cache/
 /wp-content/languages/
 /wp-content/wflogs/
+/wp-content/debug.log
 
 wp-config.php
 wp-config-sample.php

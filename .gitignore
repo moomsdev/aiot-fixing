@@ -9,4 +9,4 @@ local-site.json
 app/sql/
 db-data/
 
-app/public/wp-content/debug.log
+app/public
