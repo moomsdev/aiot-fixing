@@ -148,12 +148,14 @@
 
   &__list {
     list-style: none;
+    // padding: 1.5rem 0;
 
     &-item {
       position: relative;
       padding: 1.5rem 3.5rem;
 
       &::before {
+        margin-top: 0.5rem;
         @include iconify-mask(
           "ant-design:check-circle-outlined",
           2.3rem,
