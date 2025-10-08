@@ -1,114 +1,15 @@
 @use "../utilities/variables.scss" as *;
 @use "../utilities/mixin.scss" as *;
 
-// Common utilities
-%flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* Phần search box tham khảo
-%chip-style {
-  background-color: $yellowColor;
-  border-radius: 1.2rem;
-  font-size: 1.3rem;
-  padding: 0.4rem 1rem;
-  cursor: pointer;
-  transition: background 0.2s ease;
-
-  &:hover {
-    background-color: $blueColor;
-    color: #fff;
-  }
-}
-
-.search-box {
-  width: 100%;
-  max-width: 500px;
-  margin: 2rem auto;
-  font-family: $mainFont;
-
-  .input-wrapper {
-    @extend %flex-center;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 2rem;
-    padding: 0.4rem 0.8rem;
-    background-color: #fff;
-
-    &:focus-within {
-      border-color: $blueColor;
-      box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
-    }
-
-    input {
-      flex: 1;
-      min-width: 120px;
-      border: none;
-      outline: none;
-      font-size: 1.4rem;
-      padding: 0.6rem;
-    }
-
-    .chip {
-      @extend %flex-center;
-      background-color: $yellowColor;
-      padding: 0.3rem 0.8rem;
-      border-radius: 1.2rem;
-      font-size: 1.3rem;
-
-      button.remove {
-        margin-left: 0.4rem;
-        border: none;
-        background: transparent;
-        font-size: 1.2rem;
-        cursor: pointer;
-        color: #666;
-
-        &:hover {
-          color: red;
-        }
-      }
-    }
-  }
-
-  .search-btn {
-    @extend %flex-center;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    padding: 0.4rem;
-    margin-right: 0.6rem;
-
-    &::before {
-      content: "";
-      @include iconify("ant-design:search-outlined", 1.8rem, 1.8rem);
-    }
-
-    &:hover {
-      opacity: 0.7;
-    }
-  }
-
-  .suggestions {
-    margin-top: 0.8rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-
-    .suggestion {
-      @extend %chip-style;
-    }
-  }
-} */
-
+// ==========================
+// Pagination
+// ==========================
 .pagination {
   position: relative;
   margin-top: 5rem;
 
-  &::after,
-  &::before {
+  &::before,
+  &::after {
     content: "";
     position: absolute;
     top: 0;
@@ -120,6 +21,7 @@
   &::after {
     background: rgba(37, 30, 28, 0.1);
   }
+
   &::before {
     background: $primaryColor;
     transform: scaleX(0.2);
@@ -128,33 +30,44 @@
   }
 }
 
-// CSS Select box
+// ==========================
+// Select box
+// ==========================
 .title-select-box {
-  margin: 5rem auto 0 auto;
+  margin: 5rem auto 0;
   text-align: center;
 }
 
 .select-box {
-  @extend %flex-center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid #ccc;
   border-radius: 2rem;
   padding: 0.4rem 0.8rem;
-  margin: 2rem auto 0 auto;
+  margin: 2rem auto 0;
   background-color: #fff;
   max-width: 70rem;
 
-  .select2-container--default .select2-selection--multiple,
-  .select2-container {
+  // Select2
+  .select2-container,
+  .select2-container--default .select2-selection--multiple {
     border: none !important;
     width: 100% !important;
+  }
+
+  .select2-selection__choice {
+    background-color: $yellowColor;
+    border-radius: 3rem;
+    padding-right: 1.5rem;
   }
 
   .arrow-down {
     margin-left: 0.6rem;
 
     &::before {
-      content: "";
       @include iconify("mdi:chevron-down", 1.8rem, 1.8rem);
+      content: "";
     }
   }
 }
@@ -163,16 +76,22 @@
   margin-top: 4rem;
 }
 
-// Css section content
+// ==========================
+// Project item
+// ==========================
 .project-item {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 3rem;
-  padding: 8rem 2rem 0;
+  padding: 10rem 2rem 0;
   color: $textColor;
-  overflow: visible;
 
+  &:last-child {
+    padding-bottom: 15rem;
+  }
+
+  // Reverse layout for even items
   &:nth-child(even) {
     direction: rtl;
     text-align: right;
@@ -182,82 +101,146 @@
       text-align: left;
     }
   }
-  &:last-child {
-    padding-bottom: 15rem;
-  }
 
-  .project-item__tag {
+  &__tag {
     margin-right: 1rem;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     background-color: $yellowColor;
-
     @include resFont(1.4, 1.6);
   }
 
-  .project-item__title {
+  &__title {
     padding: 2rem 0;
     font-weight: $bold;
-
     @include resFont(1.8, 3.2);
   }
 
-  .project-item__list {
+  &__list {
     list-style: none;
     padding: 0 2rem;
 
-    .project-item__list-item {
+    &-item {
       position: relative;
       padding: 1rem 3.5rem;
 
       &::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 1rem;
         @include iconify-mask(
           "ant-design:check-circle-outlined",
           2.3rem,
           2.3rem,
           $color: $primaryColor
         );
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 1rem;
+      }
+    }
+  }
+
+  &__image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    padding: 2rem;
+    background-color: rgba($yellowColor, 0.2);
+
+    img {
+      position: relative;
+      z-index: 2;
+      max-width: 90%;
+      border-radius: 1rem;
+      transform: translateX(
+        calc(((100vw - (100% + ((100vw + 4rem) / 2))) / 2) - 5rem)
+      );
+    }
+  }
+
+  &.is-hidden {
+    display: none;
+  }
+}
+
+// ==========================
+// Background extensions
+// ==========================
+.project-item {
+  &__image {
+    position: relative;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aqua;
+    padding: 2rem;
+
+    img {
+      position: relative;
+      z-index: 2;
+      max-width: 90%;
+      border-radius: 1rem;
+      transition: transform 0.4s ease; // optional for smooth move
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      background-color: rgba($greenColor, 0.2);
+      z-index: 1;
+    }
+  }
+  &:nth-child(odd) {
+    .project-item__image {
+      &::after {
+        left: 100%;
+        width: calc(100vw - (100% + ((100vw + 4rem) / 2)));
+      }
+
+      img {
+        transform: translateX(
+          calc(((100vw - (100% + ((100vw + 4rem) / 2))) / 2) - 4rem)
+        );
+      }
+    }
+  }
+
+  &:nth-child(even) {
+    .project-item__image {
+      &::before {
+        right: 100%;
+        width: calc(100vw - (100% + ((100vw + 4rem) / 2)));
+      }
+
+      img {
+        transform: translateX(
+          calc(-1 * (((100vw - (100% + ((100vw + 4rem) / 2))) / 2) - 4rem))
+        );
       }
     }
   }
 }
 
-//CSS for Image
-.project-item__image {
-  position: relative;
-  overflow: visible;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.project-item:nth-child(odd) .project-item__image img {
-  transform: translateX(5%);
-}
-
-.project-item:nth-child(even) .project-item__image img {
-  transform: translateX(-10%);
-}
-
-//CSS for project not found
-.project-item.is-hidden {
-  display: none;
-}
+// ==========================
+// No project notice
+// ==========================
 .no-project-notice {
   text-align: center;
   font-weight: $semiBold;
   color: $primaryColor;
   margin: 0;
   padding: 8rem 0;
-
   @include resFont(2, 3.2);
 }
 
-//Responsive
+// ==========================
+// Responsive - Mobile
+// ==========================
 @include maxWidth($sm) {
   .project-item {
     grid-template-columns: 1fr;
@@ -269,23 +252,28 @@
       text-align: left;
     }
 
-    .project-item__image {
+    &__image {
       justify-content: center;
       margin-bottom: 2rem;
 
       img {
-        transform: none !important;
         width: 100%;
-        max-width: 300px;
+        max-width: 40rem;
+        transform: none !important;
+      }
+
+      &::before,
+      &::after {
+        display: none;
       }
     }
 
-    .project-item__title {
+    &__title {
       text-align: center;
       padding: 2rem 0;
     }
 
-    .project-item__list {
+    &__list {
       padding: 0 1rem;
     }
   }
