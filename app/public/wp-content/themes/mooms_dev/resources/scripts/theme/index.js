@@ -351,10 +351,12 @@ function setupMenuMobile() {
   const mobileHeader = document.querySelector(".mobile-header");
   const toggleBtn    = document.querySelector(".mobile-header__menu-toggle");
   const menuContent  = document.querySelector(".mobile-header__menu-content");
-  const closeBtn     = document.querySelector(".mobile-header__close");
+  const closeBtn     = document.querySelector(".button__close");
   const menuItems    = document.querySelectorAll(".mobile-header__menu li");
   const globalBtn    = menuContent?.querySelector(".mobile-header-header .language .global");
   const dropdownItems = document.querySelectorAll(".nav_menu > li.nav__dropdown");
+  const listMenuToggleBtn = document.querySelector(".list-menu__toggle");
+  const modal = document.querySelector(".list-modal");
 
   const hideHeader = () => mobileHeader?.classList.add("hidden");
   const showHeader = () => mobileHeader?.classList.remove("hidden");
@@ -364,19 +366,19 @@ function setupMenuMobile() {
     menuContent?.classList.add("active");
     document.documentElement.classList.add("no-scroll");
     document.body.classList.add("no-scroll");
-    hideHeader(); // Hide menu
+    hideHeader();
 
     // Reset all submenu
     menuItems.forEach((item) => item.classList.remove("open"));
   });
 
-  //
+  // Close menu
   closeBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
     menuContent?.classList.remove("active");
     document.documentElement.classList.remove("no-scroll");
     document.body.classList.remove("no-scroll");
-    showHeader(); // Display menu
+    showHeader();
 
     // Close all submenu
     menuItems.forEach((item) => item.classList.remove("open"));
@@ -421,5 +423,14 @@ function setupMenuMobile() {
     scrollTimer = setTimeout(() => {
       showHeader();
     }, 400);
+  });
+
+  // Open list menu
+  listMenuToggleBtn.addEventListener("click", () => {
+    const isActive = listMenuToggleBtn.classList.toggle("active");
+    modal.classList.toggle("active", isActive);
+
+    // Prevent scroll when open
+    document.body.style.overflow = isActive ? "hidden" : "";
   });
 }
