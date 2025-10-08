@@ -89,7 +89,6 @@
     padding-bottom: 15rem;
   }
 
-  // Reverse layout for even items
   &:nth-child(even) {
     direction: rtl;
     text-align: right;
@@ -220,6 +219,7 @@
       z-index: 1;
     }
   }
+
   &:nth-child(odd) {
     .project-item__image {
       &::after {
@@ -258,6 +258,7 @@
   color: $primaryColor;
   margin: 0;
   padding: 8rem 0;
+
   @include resFont(2, 3.2);
 }
 
