@@ -63,13 +63,12 @@
 				<div class="project-item__image" style="--bg-color: rgba(0, 180, 255, 0.2);">
 					<a href="#" class="project-item__image-link">
 						<figure class="project-item__figure">
-							<img
-								src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
+							<img src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
 								alt="Project Test 1"
 								loading="lazy"
 							>
 						</figure>
-					</a>
+ 					</a>
 				</div>
 
 			</section>
@@ -105,8 +104,7 @@
 				<div class="project-item__image" style="--bg-color: rgba(255, 150, 80, 0.2);">
 					<a href="#" class="project-item__image-link">
 						<figure class="project-item__figure">
-							<img
-								src="<?php echo get_template_directory_uri(); ?>/project-test-2.png"
+							<img src="<?php echo get_template_directory_uri(); ?>/project-test-2.png"
 								alt="Project Test 2"
 								loading="lazy"
 							>
@@ -146,8 +144,7 @@
 				<div class="project-item__image" style="--bg-color: rgba(0, 200, 150, 0.2);">
 					<a href="#" class="project-item__image-link">
 						<figure class="project-item__figure">
-							<img
-								src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
+							<img src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
 								alt="Project Test 1"
 								loading="lazy"
 							>
@@ -187,8 +184,7 @@
 				<div class="project-item__image" style="--bg-color: rgba(0, 180, 255, 0.2);">
 					<a href="#" class="project-item__image-link">
 						<figure class="project-item__figure">
-							<img
-								src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
+							<img src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
 								alt="Project Test 1"
 								loading="lazy"
 							>
