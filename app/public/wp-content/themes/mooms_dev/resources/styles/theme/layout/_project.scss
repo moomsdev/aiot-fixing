@@ -1,8 +1,8 @@
 @use "../utilities/variables.scss" as *;
 @use "../utilities/mixin.scss" as *;
 
-// Pagination
-.pagination {
+// Line
+.line-divider {
   position: relative;
   margin-top: 5rem;
 
@@ -30,7 +30,8 @@
 
 // Select box
 .title-select-box {
-  margin: 5rem auto 0;
+  margin: 8rem auto 0;
+  font-weight: $medium;
   text-align: center;
 }
 
