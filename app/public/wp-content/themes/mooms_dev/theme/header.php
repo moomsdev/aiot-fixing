@@ -133,12 +133,13 @@
 						</div>
 						<nav class="list-sidebar">
 							<ul class="list-sidebar__child-list">
-								<li><a href="#">HOME &amp; GARDEN</a></li>
-								<li><a href="#">FLOWER</a></li>
-								<li><a href="#">AGRI-PRO</a></li>
-								<li><a href="#">FARM &amp; FOODS</a></li>
-								<li><a href="#">CONSUMER CONTENTS</a></li>
-								<li><a href="#">LOGISTICS</a></li>
+								<li><a href="#">トップメッセージ</a></li>
+								<li><a href="#">沿革</a></li>
+								<li><a href="#">ビジョン・ミッション</a></li>
+								<li><a href="#">パートナーズ・ネットワーク</a></li>
+								<li><a href="#">会社概要</a></li>
+								<li><a href="#">役員紹介</a></li>
+								<li><a href="#">開発実績</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -159,15 +160,15 @@
 
 			<!-- Menu -->
 			<div class="mobile-header__item mobile-header__menu-dropdown">
-			<button type="button" class="mobile-header__menu-toggle">
-				<span class="iconify" data-icon="mdi:menu"></span>
-			</button>
+				<button type="button" class="mobile-header__menu-toggle">
+					<span class="iconify" data-icon="mdi:menu"></span>
+				</button>
 			</div>
 		</div>
 
-		<div class="mobile-header__menu-content">
-			<div class="bottom-content-cover">
-				<div class="mobile-header-header">
+		<div class="mobile-menu">
+			<div class="mobile-menu__inner">
+				<div class="mobile-menu__header">
 					<div id="logo" class="logo">
 						<a href="<?php bloginfo('url');?>" title="<?php bloginfo('name');?>">
 							<img src="<?php theOptionImage('logo');?>" width="170" height="75" alt="<?php bloginfo('name');?>">
@@ -185,17 +186,20 @@
 						</div>
 					</div>
 				</div>
-				<div class="mobile-header-content">
+				<div class="mobile-menu__content">
 					<?php
 					wp_nav_menu([
 					'theme_location' => 'main-menu',
-					'menu_class'     => 'mobile-header__menu',
+					'menu_class'     => 'mobile-menu__menu',
 					'container'      => false,
 					]);
 					?>
 				</div>
 			</div>
-			<div class="mobile-header-close">
-				<button class="button__close">Close</button>
+			<div class="mobile-menu__close">
+				<button class="button-close">
+					<span class="button-close__icon"></span>
+  					<span class="button-close__label">Close</span>
+				</button>
 			</div>
 		</div>
