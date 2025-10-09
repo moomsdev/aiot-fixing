@@ -70,7 +70,6 @@
 						</figure>
  					</a>
 				</div>
-
 			</section>
 
 			<section class="project-item" data-value="wp js">
