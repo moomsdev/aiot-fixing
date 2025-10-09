@@ -65,8 +65,7 @@
 						<figure class="project-item__figure">
 							<img src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
 								alt="Project Test 1"
-								loading="lazy"
-							>
+								loading="lazy">
 						</figure>
  					</a>
 				</div>
@@ -105,8 +104,7 @@
 						<figure class="project-item__figure">
 							<img src="<?php echo get_template_directory_uri(); ?>/project-test-2.png"
 								alt="Project Test 2"
-								loading="lazy"
-							>
+								loading="lazy">
 						</figure>
 					</a>
 				</div>
@@ -145,8 +143,7 @@
 						<figure class="project-item__figure">
 							<img src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
 								alt="Project Test 1"
-								loading="lazy"
-							>
+								loading="lazy">
 						</figure>
 					</a>
 				</div>
@@ -185,8 +182,7 @@
 						<figure class="project-item__figure">
 							<img src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
 								alt="Project Test 1"
-								loading="lazy"
-							>
+								loading="lazy">
 						</figure>
 					</a>
 				</div>
