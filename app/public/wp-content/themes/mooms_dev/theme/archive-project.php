@@ -15,7 +15,7 @@
 		<div class="breadcrumb-top">
 			<?php theBreadcrumb() ?>			
 		</div>
-		<h1 class="title-block"><?php thePageTitle(); ?></h1>
+		<gh1 class="title-block"><?php thePageTitle(); ?></gh1>
 
 		<div class="line-divider"></div>
 		<div class="list-project">
@@ -30,8 +30,6 @@
 					<option value="jv">Java</option>
 					<option value="js">Javascript</option>
 				</select>
-				<div class="arrow-down"></div>
-
 			</div>
 
 			<section class="project-item" data-value="wp">
@@ -76,7 +74,7 @@
 
 			</section>
 
-			<section class="project-item" data-value="wp">
+			<section class="project-item" data-value="wp js">
 				<div class="project-item__content">
 					<div class="project-item__tags">
 						<a href="#" class="project-item__tag">Lorem Tag</a>
