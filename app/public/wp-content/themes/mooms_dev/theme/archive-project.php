@@ -62,7 +62,7 @@
 					</ul>
 				</div>
 
-				<div class="project-item__image">
+				<div class="project-item__image" style="--bg-color: rgba(0, 180, 255, 0.2);">
 					<a href="#" class="project-item__image-link">
 						<img
 							src="<?php echo get_template_directory_uri(); ?>/project-test-1.png"
@@ -101,7 +101,7 @@
 					</ul>
 				</div>
 
-				<div class="project-item__image">
+				<div class="project-item__image" style="--bg-color: rgba(255, 200, 0, 0.2);">
 					<a href="#" class="project-item__image-link">
 						<img
 							src="<?php echo get_template_directory_uri(); ?>/project-test-2.png"
