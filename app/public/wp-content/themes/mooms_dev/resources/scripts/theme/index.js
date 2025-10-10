@@ -9,6 +9,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AOS from "aos/dist/aos";
 import 'jquery.easing';
 import Swal from 'sweetalert2';
+import $ from "jquery";
+import "select2";
 
 jQuery(document).ready(function () {
   // const swup = new Swup();
@@ -29,6 +31,8 @@ function initializePageFeatures() {
   setupHideHeaderOnScroll();
   setupAjaxSendMail();
   setupMenuMobile();
+  setupSelect2();
+  setupProjectFilter();
 }
 /**
  * Khởi tạo hoạt ảnh GSAP và AOS
@@ -413,6 +417,74 @@ function setupMenuMobile() {
       item.classList.add("has-submenu");
     }
   });
+}
+/**
+ * Using library select2
+ */
+function setupSelect2() {
+  $('.js-example-basic-multiple').select2();
+}
+
+/**
+ * Filer item by value select box
+ */
+function setupProjectFilter() {
+  const selectBox = document.querySelector('.js-example-basic-multiple');
+  if (!selectBox) return;
+
+  const projects = document.querySelectorAll('.project-item');
+
+  let noProjectNotice = document.querySelector('.no-project-notice');
+  if (!noProjectNotice) {
+    noProjectNotice = document.createElement('p');
+    noProjectNotice.className = 'no-project-notice';
+    noProjectNotice.textContent = 'No project found!!!';
+    noProjectNotice.style.display = 'none';
+    selectBox
+      .closest('.page-listing, .mm-container, body')
+      .appendChild(noProjectNotice);
+  }
+
+  function filterProjects() {
+    const selectedValues = Array.from(selectBox.selectedOptions).map((opt) =>
+      opt.value.trim()
+    );
+
+    let visibleCount = 0;
+
+    projects.forEach((project) => {
+      const dataValues =
+        project
+          .getAttribute('data-value')
+          ?.split(/\s+/)
+          .map((v) => v.trim()) || [];
+
+      const match =
+        selectedValues.length === 0 ||
+        selectedValues.some((value) => dataValues.includes(value));
+
+      if (match) {
+        project.classList.remove('is-hidden');
+        visibleCount++;
+      } else {
+        project.classList.add('is-hidden');
+      }
+    });
+
+    if (visibleCount === 0) {
+      noProjectNotice.style.display = 'block';
+    } else {
+      noProjectNotice.style.display = 'none';
+    }
+  }
+
+  if (window.jQuery && jQuery.fn.select2) {
+    jQuery(selectBox).on('change.select2', filterProjects);
+  } else {
+    selectBox.addEventListener('change', filterProjects);
+  }
+
+  filterProjects();
 
   // Hide header when scroll and display when stop
   let scrollTimer;

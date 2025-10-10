@@ -12,6 +12,7 @@
 @use "./layout/header.scss" as *;
 @use "./layout/footer.scss" as *;
 @use "./layout/breadcumb.scss" as *;
+@use "./layout/project.scss" as *;
 
 @use "./blocks/blog.scss" as *;
 @use "./blocks/contact.scss" as *;
@@ -26,3 +27,4 @@
 @import "~@csstools/normalize.css";
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~swiper/swiper-bundle.min.css";
+@import "~select2/dist/css/select2.min.css";
