@@ -9,6 +9,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AOS from "aos/dist/aos";
 import 'jquery.easing';
 import Swal from 'sweetalert2';
+import $ from "jquery";
+import "select2";
 
 jQuery(document).ready(function () {
   // const swup = new Swup();
@@ -30,6 +32,8 @@ function initializePageFeatures() {
   setupAjaxSendMail();
   setupMenuMobile();
   alertDropdownSubMenu();
+  setupSelect2();
+  setupProjectFilter();
 }
 /**
  * Khởi tạo hoạt ảnh GSAP và AOS
@@ -351,38 +355,54 @@ function setupAjaxSendMail() {
 function setupMenuMobile() {
   const mobileHeader = document.querySelector(".mobile-header");
   const toggleBtn    = document.querySelector(".mobile-header__menu-toggle");
-  const menuContent  = document.querySelector(".mobile-header__menu-content");
-  const closeBtn     = document.querySelector(".button__close");
-  const menuItems    = document.querySelectorAll(".mobile-header__menu li");
-  const globalBtn    = menuContent?.querySelector(".mobile-header-header .language .global");
+  const menuContent  = document.querySelector(".mobile-menu");
+  const closeBtn     = document.querySelector(".button-close");
+  const menuItems    = document.querySelectorAll(".mobile-menu__menu li");
+  const globalBtn    = menuContent?.querySelector(".mobile-menu__header .language .global");
   const dropdownItems = document.querySelectorAll(".nav_menu > li.nav__dropdown");
   const listMenuToggleBtn = document.querySelector(".list-menu__toggle");
   const modal = document.querySelector(".list-modal");
+  const overlay = document.querySelector('.list-modal__overlay');
 
   const hideHeader = () => mobileHeader?.classList.add("hidden");
   const showHeader = () => mobileHeader?.classList.remove("hidden");
 
   toggleBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
+
+    // Mark position
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
+    // Active menu
     menuContent?.classList.add("active");
     document.documentElement.classList.add("no-scroll");
     document.body.classList.add("no-scroll");
     hideHeader();
 
-    // Reset all submenu
+    // Reset submenu
     menuItems.forEach((item) => item.classList.remove("open"));
   });
 
-  // Close menu
   closeBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
+
+    // Hide menu
     menuContent?.classList.remove("active");
     document.documentElement.classList.remove("no-scroll");
     document.body.classList.remove("no-scroll");
     showHeader();
 
-    // Close all submenu
-    menuItems.forEach((item) => item.classList.remove("open"));
+    // Back to postion before 
+    const scrollY = parseInt(document.body.style.top || "0") * -1;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: scrollY, behavior: "instant" });
+    });
   });
 
   // Tonggle languge
@@ -414,6 +434,74 @@ function setupMenuMobile() {
       item.classList.add("has-submenu");
     }
   });
+}
+/**
+ * Using library select2
+ */
+function setupSelect2() {
+  $('.js-example-basic-multiple').select2();
+}
+
+/**
+ * Filer item by value select box
+ */
+function setupProjectFilter() {
+  const selectBox = document.querySelector('.js-example-basic-multiple');
+  if (!selectBox) return;
+
+  const projects = document.querySelectorAll('.project-item');
+
+  let noProjectNotice = document.querySelector('.no-project-notice');
+  if (!noProjectNotice) {
+    noProjectNotice = document.createElement('p');
+    noProjectNotice.className = 'no-project-notice';
+    noProjectNotice.textContent = 'No project found!!!';
+    noProjectNotice.style.display = 'none';
+    selectBox
+      .closest('.page-listing, .mm-container, body')
+      .appendChild(noProjectNotice);
+  }
+
+  function filterProjects() {
+    const selectedValues = Array.from(selectBox.selectedOptions).map((opt) =>
+      opt.value.trim()
+    );
+
+    let visibleCount = 0;
+
+    projects.forEach((project) => {
+      const dataValues =
+        project
+          .getAttribute('data-value')
+          ?.split(/\s+/)
+          .map((v) => v.trim()) || [];
+
+      const match =
+        selectedValues.length === 0 ||
+        selectedValues.some((value) => dataValues.includes(value));
+
+      if (match) {
+        project.classList.remove('is-hidden');
+        visibleCount++;
+      } else {
+        project.classList.add('is-hidden');
+      }
+    });
+
+    if (visibleCount === 0) {
+      noProjectNotice.style.display = 'block';
+    } else {
+      noProjectNotice.style.display = 'none';
+    }
+  }
+
+  if (window.jQuery && jQuery.fn.select2) {
+    jQuery(selectBox).on('change.select2', filterProjects);
+  } else {
+    selectBox.addEventListener('change', filterProjects);
+  }
+
+  filterProjects();
 
   // Hide header when scroll and display when stop
   let scrollTimer;
@@ -427,12 +515,33 @@ function setupMenuMobile() {
   });
 
   // Open list menu
-  listMenuToggleBtn.addEventListener("click", () => {
-    const isActive = listMenuToggleBtn.classList.toggle("active");
-    modal.classList.toggle("active", isActive);
 
-    // Prevent scroll when open
-    document.body.style.overflow = isActive ? "hidden" : "";
+  function openModal() {
+    modal.classList.add('active');
+    listMenuToggleBtn.classList.add('active');
+  }
+
+  function closeModal() {
+    modal.classList.add('closing');
+    listMenuToggleBtn.classList.remove('active');
+
+    setTimeout(() => {
+      modal.classList.remove('active', 'closing');
+    }, 400);
+  }
+
+  listMenuToggleBtn?.addEventListener('click', () => {
+    if (!modal.classList.contains('active')) {
+      openModal();
+    } else {
+      closeModal();
+    }
+  });
+
+  overlay?.addEventListener('click', () => {
+    if (modal.classList.contains('active')) {
+      closeModal();
+    }
   });
 
 }

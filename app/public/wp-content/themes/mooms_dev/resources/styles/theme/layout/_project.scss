@@ -1,0 +1,348 @@
+@use "../utilities/variables.scss" as *;
+@use "../utilities/mixin.scss" as *;
+
+// Line
+.line-divider {
+  position: relative;
+  margin-top: 5rem;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+  }
+
+  &::after {
+    background: rgba(37, 30, 28, 0.1);
+  }
+
+  &::before {
+    background: $primaryColor;
+    transform: scaleX(0.2);
+    transform-origin: left center;
+    transition: transform 0.4s ease-out;
+  }
+}
+
+// Select box
+.title-select-box {
+  margin: 8rem auto 0;
+  font-weight: $medium;
+  text-align: center;
+}
+
+.select-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ccc;
+  border-radius: 2rem;
+  padding: 0.4rem 0.8rem;
+  margin: 2rem auto 0;
+  background-color: #fff;
+  max-width: 70rem;
+
+  // Select2
+  .select2-container,
+  .select2-container--default .select2-selection--multiple {
+    border: none !important;
+    width: 100% !important;
+  }
+
+  .select2-container--default
+    .select2-selection--multiple
+    .select2-selection__choice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.2em 0.5rem 0 0;
+    padding: 0.4rem 1.5rem 0.4rem 0.5rem;
+    border: none;
+    border-radius: 3rem;
+    font-size: 14px;
+    background-color: $yellowColor;
+  }
+
+  .select2-selection__choice__remove {
+    color: #fff !important;
+    padding: 0 0.25rem 0.25rem 0.5rem;
+  }
+}
+
+.select2-dropdown {
+  margin-top: 4rem;
+}
+
+// Project item
+.project-item {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 3rem;
+  margin: 10rem 0;
+  padding: 0;
+  color: $textColor;
+
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 15rem;
+  }
+
+  &:nth-child(even) {
+    direction: rtl;
+    text-align: right;
+
+    .project-item__content,
+    .project-item__image {
+      direction: ltr;
+      text-align: left;
+    }
+  }
+
+  &__tag {
+    display: inline-block;
+    margin-right: 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid $yellowColor;
+    border-radius: 0.5rem;
+    color: $textColor;
+    background-color: $yellowColor;
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    @include resFont(1.4, 1.6);
+
+    &:hover {
+      background-color: #fff;
+      color: darken($yellowColor, 10%);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__title {
+    padding: 3rem 0;
+    font-weight: $bold;
+    color: $textColor;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+
+    @include resFont(1.8, 3.2);
+
+    &:hover {
+      color: $primaryColor;
+
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+  }
+
+  &__link {
+    color: $textColor;
+  }
+
+  &__description {
+    margin-bottom: 1.5rem;
+  }
+
+  &__list {
+    list-style: none;
+
+    &-item {
+      position: relative;
+      margin-bottom: 1.5rem;
+      padding-left: 3.5rem;
+
+      &::before {
+        margin-top: -0.1rem;
+
+        @include iconify-mask(
+          "ant-design:check-circle-outlined",
+          2.3rem,
+          2.3rem,
+          $color: $primaryColor
+        );
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+    }
+  }
+
+  &__image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible;
+    padding: 2rem;
+    background-color: rgba($yellowColor, 0.2);
+
+    img {
+      position: relative;
+      z-index: 2;
+      max-width: 90%;
+      border-radius: 1rem;
+    }
+  }
+
+  &.is-hidden {
+    display: none;
+  }
+}
+
+// Background extensions
+.project-item {
+  &__image {
+    position: relative;
+    overflow: visible;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color);
+    padding: 2rem;
+
+    img {
+      position: relative;
+      z-index: 2;
+      max-width: 90%;
+      border-radius: 1rem;
+      transition: transform 0.4s ease;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      height: 100%;
+      background-color: var(--bg-color);
+      z-index: 1;
+    }
+  }
+
+  &:nth-child(odd) {
+    .project-item__image {
+      &::after {
+        left: 100%;
+        width: calc(100vw - (100% + ((100vw + 3.5rem) / 2)));
+      }
+
+      img {
+        transform: translateX(
+          calc(((100vw - (100% + ((100vw + 3.5rem) / 2))) / 2) - 1.75rem)
+        );
+      }
+    }
+  }
+
+  &:nth-child(even) {
+    .project-item__image {
+      &::before {
+        right: 100%;
+        width: calc(100vw - (100% + ((100vw + 3.5rem) / 2)));
+      }
+
+      img {
+        transform: translateX(
+          calc(-1 * (((100vw - (100% + ((100vw + 3.5rem) / 2))) / 2) - 6rem))
+        );
+      }
+    }
+  }
+}
+
+// No project notice
+.no-project-notice {
+  text-align: center;
+  font-weight: $semiBold;
+  color: $primaryColor;
+  margin: 0;
+  padding: 8rem 0;
+
+  @include resFont(2, 3.2);
+}
+
+// Responsive - Laptop 1440
+@include maxWidth($xl) {
+  .project-item {
+    &:nth-child(odd) {
+      .project-item__image {
+        &::after {
+          left: 100%;
+          width: calc(100vw - (100% + ((100vw + 3rem) / 2)));
+        }
+      }
+    }
+
+    &:nth-child(even) {
+      .project-item__image {
+        &::before {
+          right: 100%;
+          width: calc(100vw - (100% + ((100vw + 3rem) / 2)));
+        }
+      }
+    }
+  }
+}
+
+// Responsive - Mobile
+@include maxWidth($sm) {
+  .project-item {
+    grid-template-columns: 1fr;
+    gap: 0rem;
+    margin: 4rem 0;
+
+    &:nth-child(even) {
+      direction: ltr;
+      text-align: left;
+    }
+
+    &:last-child {
+      padding-bottom: 2rem;
+    }
+    &__title {
+      padding: 2rem 0;
+    }
+
+    &__image {
+      justify-content: center;
+      margin-bottom: 2rem;
+
+      img {
+        width: 100%;
+        max-width: 40rem;
+        transform: none !important;
+      }
+
+      &,
+      .project-item:nth-child(odd) &,
+      .project-item:nth-child(even) & {
+        &::before,
+        &::after {
+          width: calc((100vw - 100%) / 2);
+          left: auto;
+          right: auto;
+        }
+
+        &::before {
+          right: 100%;
+        }
+        &::after {
+          left: 100%;
+        }
+      }
+    }
+  }
+
+  .select2-dropdown {
+    margin-top: 5.25rem;
+  }
+}

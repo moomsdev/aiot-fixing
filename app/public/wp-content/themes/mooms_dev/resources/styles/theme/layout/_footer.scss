@@ -544,7 +544,11 @@ footer {
         padding: 2rem 0;
 
         @include maxWidth ($md) {
-            padding: 2rem 0 7rem 0;
+            padding: 0 0 7.5rem 0;
+        }
+
+        @include maxWidth ($xs) {
+            padding: 2rem 0 9rem 0;
         }
     }
 }
