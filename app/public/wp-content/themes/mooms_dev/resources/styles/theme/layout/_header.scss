@@ -596,7 +596,7 @@ header {
             padding: 2.5rem 4rem;
             background: #fff;
             color: $textColor;
-            border-bottom: 1px solid rgb(191 12 12);
+            border-bottom: 1px solid $primaryColor;
 
             h3 {
                 margin: 0;
@@ -766,7 +766,7 @@ header {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: rgb(253 0 0 / 87%);
+        background-color: $primaryColor;
         overflow-y: auto;
         opacity: 0;
         visibility: hidden;
@@ -788,7 +788,7 @@ header {
             margin: 0 auto 2rem;
             border-radius: 3rem;
             overflow: hidden;
-            background-image: url("/wp-content/themes/mooms_dev/resources/images/mask.png");
+            background-image: url("~@images/mask.png");
             background-repeat: no-repeat;
             background-position: center bottom;
             background-size: 100%;
@@ -1099,9 +1099,9 @@ header {
 // add class no-scroll
 html.no-scroll,
 body.no-scroll {
-  overflow: hidden;
-  height: 100%;
-  touch-action: none;
+    overflow: hidden;
+    height: 100%;
+    touch-action: none;
 }
 
 @keyframes contact-icon-hover {
