@@ -10,19 +10,6 @@
   }
 }
 
-//Loop-post css
-.list-items .item-post .content {
-  height: 14rem;
-
-  .title-post {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-}
-
 //Pagination css
 .pagination {
   padding: 4rem 0;
