@@ -354,38 +354,54 @@ function setupAjaxSendMail() {
 function setupMenuMobile() {
   const mobileHeader = document.querySelector(".mobile-header");
   const toggleBtn    = document.querySelector(".mobile-header__menu-toggle");
-  const menuContent  = document.querySelector(".mobile-header__menu-content");
-  const closeBtn     = document.querySelector(".button__close");
-  const menuItems    = document.querySelectorAll(".mobile-header__menu li");
-  const globalBtn    = menuContent?.querySelector(".mobile-header-header .language .global");
+  const menuContent  = document.querySelector(".mobile-menu");
+  const closeBtn     = document.querySelector(".button-close");
+  const menuItems    = document.querySelectorAll(".mobile-menu__menu li");
+  const globalBtn    = menuContent?.querySelector(".mobile-menu__header .language .global");
   const dropdownItems = document.querySelectorAll(".nav_menu > li.nav__dropdown");
   const listMenuToggleBtn = document.querySelector(".list-menu__toggle");
   const modal = document.querySelector(".list-modal");
+  const overlay = document.querySelector('.list-modal__overlay');
 
   const hideHeader = () => mobileHeader?.classList.add("hidden");
   const showHeader = () => mobileHeader?.classList.remove("hidden");
 
   toggleBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
+
+    // Mark position
+    const scrollY = window.scrollY;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
+    // Active menu
     menuContent?.classList.add("active");
     document.documentElement.classList.add("no-scroll");
     document.body.classList.add("no-scroll");
     hideHeader();
 
-    // Reset all submenu
+    // Reset submenu
     menuItems.forEach((item) => item.classList.remove("open"));
   });
 
-  // Close menu
   closeBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
+
+    // Hide menu
     menuContent?.classList.remove("active");
     document.documentElement.classList.remove("no-scroll");
     document.body.classList.remove("no-scroll");
     showHeader();
 
-    // Close all submenu
-    menuItems.forEach((item) => item.classList.remove("open"));
+    // Back to postion before 
+    const scrollY = parseInt(document.body.style.top || "0") * -1;
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.width = "";
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: scrollY, behavior: "instant" });
+    });
   });
 
   // Tonggle languge
@@ -498,11 +514,32 @@ function setupProjectFilter() {
   });
 
   // Open list menu
-  listMenuToggleBtn.addEventListener("click", () => {
-    const isActive = listMenuToggleBtn.classList.toggle("active");
-    modal.classList.toggle("active", isActive);
 
-    // Prevent scroll when open
-    document.body.style.overflow = isActive ? "hidden" : "";
+  function openModal() {
+    modal.classList.add('active');
+    listMenuToggleBtn.classList.add('active');
+  }
+
+  function closeModal() {
+    modal.classList.add('closing');
+    listMenuToggleBtn.classList.remove('active');
+
+    setTimeout(() => {
+      modal.classList.remove('active', 'closing');
+    }, 400);
+  }
+
+  listMenuToggleBtn?.addEventListener('click', () => {
+    if (!modal.classList.contains('active')) {
+      openModal();
+    } else {
+      closeModal();
+    }
+  });
+
+  overlay?.addEventListener('click', () => {
+    if (modal.classList.contains('active')) {
+      closeModal();
+    }
   });
 }
