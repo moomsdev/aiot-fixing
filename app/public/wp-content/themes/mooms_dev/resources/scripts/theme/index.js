@@ -352,36 +352,43 @@ function setupAjaxSendMail() {
 }
 
 function setupMenuMobile() {
-  const toggleBtn   = document.querySelector(".mobile-header__menu-toggle");
-  const menuContent = document.querySelector(".mobile-header__menu-content");
-  const closeBtn    = document.querySelector(".mobile-header__close");
-  const menuItems   = document.querySelectorAll(".mobile-header__menu li");
-  const globalBtn   = menuContent?.querySelector(".mobile-header-header .language .global");
-  const dropdownItems = document.querySelectorAll('.nav_menu > li.nav__dropdown');
+  const mobileHeader = document.querySelector(".mobile-header");
+  const toggleBtn    = document.querySelector(".mobile-header__menu-toggle");
+  const menuContent  = document.querySelector(".mobile-header__menu-content");
+  const closeBtn     = document.querySelector(".button__close");
+  const menuItems    = document.querySelectorAll(".mobile-header__menu li");
+  const globalBtn    = menuContent?.querySelector(".mobile-header-header .language .global");
+  const dropdownItems = document.querySelectorAll(".nav_menu > li.nav__dropdown");
+  const listMenuToggleBtn = document.querySelector(".list-menu__toggle");
+  const modal = document.querySelector(".list-modal");
 
-  // Open mobile menu
+  const hideHeader = () => mobileHeader?.classList.add("hidden");
+  const showHeader = () => mobileHeader?.classList.remove("hidden");
+
   toggleBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
     menuContent?.classList.add("active");
     document.documentElement.classList.add("no-scroll");
     document.body.classList.add("no-scroll");
+    hideHeader();
 
-    // Reset submenu when opening menu
+    // Reset all submenu
     menuItems.forEach((item) => item.classList.remove("open"));
   });
 
-  // Close mobile menu
+  // Close menu
   closeBtn?.addEventListener("click", (e) => {
     e.stopPropagation();
     menuContent?.classList.remove("active");
     document.documentElement.classList.remove("no-scroll");
     document.body.classList.remove("no-scroll");
+    showHeader();
 
-    // Close all submenus
+    // Close all submenu
     menuItems.forEach((item) => item.classList.remove("open"));
   });
 
-  // Toggle language dropdown on mobile
+  // Tonggle languge
   globalBtn?.addEventListener("click", (e) => {
     if (window.innerWidth < 769) {
       e.stopPropagation();
@@ -389,25 +396,7 @@ function setupMenuMobile() {
     }
   });
 
-  // Close menu and language dropdown when clicking outside
-  document.addEventListener("click", (e) => {
-    if (menuContent?.classList.contains("active") &&
-        !menuContent.contains(e.target) &&
-        !toggleBtn.contains(e.target)) {
-      menuContent.classList.remove("active");
-      document.documentElement.classList.remove("no-scroll");
-      document.body.classList.remove("no-scroll");
-      menuItems.forEach((item) => item.classList.remove("open"));
-    }
-
-    if (window.innerWidth < 769 &&
-        globalBtn?.classList.contains("active") &&
-        !globalBtn.contains(e.target)) {
-      globalBtn.classList.remove("active");
-    }
-  });
-
-  // Handle submenu in mobile
+  // Handle sub-menu open
   menuItems.forEach((item) => {
     const submenu = item.querySelector(".sub-menu");
 
@@ -422,10 +411,10 @@ function setupMenuMobile() {
     }
   });
 
-  // Add class for desktop dropdown
-  dropdownItems.forEach(item => {
-    if (item.querySelector('.sub-menu')) {
-      item.classList.add('has-submenu');
+
+  dropdownItems.forEach((item) => {
+    if (item.querySelector(".sub-menu")) {
+      item.classList.add("has-submenu");
     }
   });
 }
@@ -496,4 +485,24 @@ function setupProjectFilter() {
   }
 
   filterProjects();
+
+  // Hide header when scroll and display when stop
+  let scrollTimer;
+  window.addEventListener("scroll", () => {
+    hideHeader();
+
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => {
+      showHeader();
+    }, 400);
+  });
+
+  // Open list menu
+  listMenuToggleBtn.addEventListener("click", () => {
+    const isActive = listMenuToggleBtn.classList.toggle("active");
+    modal.classList.toggle("active", isActive);
+
+    // Prevent scroll when open
+    document.body.style.overflow = isActive ? "hidden" : "";
+  });
 }

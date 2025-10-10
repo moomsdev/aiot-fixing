@@ -111,9 +111,40 @@
 					</div>
 				</div>
 			</div>
-
 		</header>
 
+		<div id="list-content" class="list-content">
+			<aside class="list-menu">
+				<button class="list-menu__toggle" type="button">
+					<span class="list-menu__label">Business List</span>
+					<span class="list-menu__icon">
+						<span class="list-menu__bar"></span>
+						<span class="list-menu__bar"></span>
+						<span class="list-menu__bar"></span>
+					</span>
+				</button>
+
+				<div class="list-modal">
+					<div class="list-modal__overlay">
+					</div>
+					<div class="list-modal__content">
+						<div class="list-modal__header">
+							<h3>Business List</h3>
+						</div>
+						<nav class="list-sidebar">
+							<ul class="list-sidebar__child-list">
+								<li><a href="#">HOME &amp; GARDEN</a></li>
+								<li><a href="#">FLOWER</a></li>
+								<li><a href="#">AGRI-PRO</a></li>
+								<li><a href="#">FARM &amp; FOODS</a></li>
+								<li><a href="#">CONSUMER CONTENTS</a></li>
+								<li><a href="#">LOGISTICS</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</aside>
+		</div>
 		<!-- Bottom Navigation for mobile -->
 		<div class="mobile-header">
 			<?php
@@ -164,5 +195,7 @@
 					?>
 				</div>
 			</div>
-			<button class="mobile-header__close">Close</button>
+			<div class="mobile-header-close">
+				<button class="button__close">Close</button>
+			</div>
 		</div>
